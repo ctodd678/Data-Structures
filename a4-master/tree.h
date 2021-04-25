@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//tree.h
+
+
+//STRUCTURES
+
+struct Node{
+    void *data;
+    struct Node *lt;
+    struct Node *gte;
+};
+
+struct Performance{
+    unsigned int reads;
+    unsigned int writes;
+    unsigned int mallocs;
+    unsigned int frees;
+};
+
+//BASIC FUNCTION PROTOTYPES
+
+struct Performance *newPerformance();
+
+void attachNode(struct Performance*performance, struct Node**node_ptr, void *src, unsigned int width );
+
+int comparNode(struct Performance *performance, struct Node**node_ptr, int (*compar)(const void *, const void *), void *target);
+
+struct Node**next(struct Performance *performance, struct Node**node_ptr, int direction);
+
+void readNode(struct Performance *performance, struct Node **node_ptr, void *dest, unsigned int width );
+
+void detachNode(struct Performance *performance, struct Node **node_ptr);
+
+int isEmpty(struct Performance *performance, struct Node **node_ptr);
+
+//DERIVED FUNCTION PROTOTYPES
+
+void addItem(struct Performance *performance, struct Node **node_ptr, int(*compar)(const void*, const void*), void *src, unsigned int width);
+
+void freeTree(struct Performance *performance, struct Node **node_ptr);
+
+//void readItem( struct Performance *performance, struct Node**node_ptr, void *target, void *dest, unsigned intwidth);
+
+//20% FUNCTION PROTOTYPES
+
+int searchItem(struct Performance *performance, struct Node **node_ptr, int(*compar)(const void*, const void*), void *target, unsigned int width);
